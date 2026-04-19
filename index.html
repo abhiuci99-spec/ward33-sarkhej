@@ -268,6 +268,7 @@
   /* highlight match */
   .hl { background: rgba(255,107,0,.25); border-radius: 2px; padding: 0 1px; }
 </style>
+<script data-goatcounter="https://abhiuci99.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
 <body>
 
@@ -365,6 +366,8 @@ function selectSociety(idx) {
 
   inp.value = s.name;
   dd.style.display = 'none';
+  // Track society search
+  if(window.goatcounter) window.goatcounter.count({path: 'search/' + s.sk, title: s.name, event: true});
   placeholderEl.style.display = 'none';
   res.style.display = 'block';
 
@@ -425,6 +428,15 @@ function selectSociety(idx) {
 
   // Scroll to result smoothly
   setTimeout(() => res.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+  // Track button clicks
+  var mapBtn = res.querySelector('.btn-map');
+  var callBtn = res.querySelector('.btn-call');
+  if(mapBtn) mapBtn.addEventListener('click', function(){
+    if(window.goatcounter) window.goatcounter.count({path: 'map-click/' + s.sk, title: 'Map: ' + s.name, event: true});
+  });
+  if(callBtn) callBtn.addEventListener('click', function(){
+    if(window.goatcounter) window.goatcounter.count({path: 'call-click/' + s.sk, title: 'Call: ' + s.name, event: true});
+  });
 }
 </script>
 </body>
